@@ -89,4 +89,8 @@ target/
 .mypy_cache/
 uber
 mlruns/
-models/
+
+# DVC pipeline outputs
+/data/raw/
+/data/processed/
+/models/
