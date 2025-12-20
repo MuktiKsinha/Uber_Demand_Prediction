@@ -94,3 +94,4 @@ mlruns/
 /data/raw/
 /data/processed/
 /models/
+/run_information.json
