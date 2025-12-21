@@ -1,4 +1,4 @@
-#CI-CD Pipeline
+#CI-CD Pipeline for uber-demand-prediction
 name: CI-CD
 
 on: push
