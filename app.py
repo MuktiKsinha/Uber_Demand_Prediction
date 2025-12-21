@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import mlflow
 import matplotlib.pyplot as plt
 from sklearn import pipeline
 import streamlit as st
@@ -10,6 +11,20 @@ from sklearn import set_config
 from time import sleep
 
 set_config(transform_output="pandas")
+
+import dagshub
+dagshub.init(repo_name='Uber_Demand_Prediction',repo_owner='MuktiKsinha',mlflow = True)
+
+# set the dagshub tracking server
+mlflow.set_tracking_uri('https://dagshub.com/MuktiKsinha/Uber_Demand_Prediction.mlflow')
+
+# get model name
+registered_model_name = 'uber_demand_prediction_model'
+stage = "Production"
+model_path = f"models:/{registered_model_name}/{stage}"
+
+# load the latest model from model registry
+model = mlflow.sklearn.load_model(model_path)
 
 # set the root path
 root_path = Path(__file__).parent
@@ -57,6 +72,19 @@ st.markdown("""
 # UI of app
 st.markdown("<h1 style='text-align: center; color: #1f77d4;'>🚕 Uber Demand Prediction - NYC</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #666;'>Real-time demand forecasting across New York City regions</p>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <style>
+    /* Target ONLY the radio label text */
+    section[data-testid="stSidebar"] div > label {
+        color: white !important;
+        font-weight: 600;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Sidebar configuration
 st.sidebar.markdown("### ⚙️ Configuration")
