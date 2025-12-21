@@ -95,3 +95,4 @@ mlruns/
 /data/processed/
 /models/
 /run_information.json
+data/interim/
