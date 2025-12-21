@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Docker-Containerized-blue?logo=docker">
   <img src="https://img.shields.io/badge/AWS-EC2%20%7C%20ECR-orange?logo=amazonaws">
   <img src="https://img.shields.io/badge/GitHub-Actions-black?logo=githubactions">
-  <img src="https://img.shields.io/badge/MLflow-Experiment%20Tracking-blue?logo=mlflow">
+  <img src="https://img.shields.io/badge/MLflow-Experiment%20Tracking-blue">
 </p>
 
 <p align="center">
@@ -27,8 +27,8 @@ showcasing interactive demand maps and real-time predictions:
 </p>
 
 <p align="center">
-  <a href="https://youtu.be/YOUR_DEMO_LINK">
-    <img src="assets/demo_thumbnail.png" width="700"/>
+  <a href="https://youtu.be/C6HX-5c06Rs">
+    <img src="assets/uber.png" width="700"/>
   </a>
 </p>
 
@@ -41,14 +41,37 @@ showcasing interactive demand maps and real-time predictions:
 <p>
 This project builds an <strong>end-to-end demand forecasting system</strong> for
 Uber-like ride-hailing platforms. It predicts
-<strong>ride demand across locations and time windows</strong> using historical trip data.
+<strong>ride demand across locations and time windows</strong> using historical
+spatio-temporal trip data.
 </p>
 
 <p>
-The system follows modern <strong>MLOps & deployment best practices</strong>,
-including experiment tracking, reproducible pipelines, CI/CD automation,
-and cloud-native deployment.
+Beyond accurate forecasting, the system is designed with
+<strong>production-grade MLOps best practices</strong>, including
+<strong>MLflow-based experiment tracking</strong>, reproducible pipelines,
+automated CI/CD workflows, and cloud-native deployment on AWS.
 </p>
+
+<hr/>
+
+<h2>🎯 Real-World Impact & Use Cases</h2>
+
+<h3>👤 Driver Perspective</h3>
+<ul>
+  <li>🚗 Reduced idle time through high-demand zone awareness</li>
+  <li>⏱️ Increased earnings by identifying peak demand hours</li>
+  <li>📍 Smarter positioning with minimal unnecessary travel</li>
+  <li>😊 Higher trip frequency and income stability</li>
+</ul>
+
+<h3>🏢 Company (Uber) Perspective</h3>
+<ul>
+  <li>📊 Optimized fleet allocation across regions</li>
+  <li>💰 Data-driven surge pricing decisions</li>
+  <li>⏳ Reduced passenger wait times</li>
+  <li>📉 Lower operational costs</li>
+  <li>📈 Scalable demand planning for city-wide growth</li>
+</ul>
 
 <hr/>
 
@@ -58,7 +81,7 @@ and cloud-native deployment.
 <ul>
   <li>📌 Pickup latitude & longitude clustering</li>
   <li>⏰ Hour, day-of-week, weekend indicators</li>
-  <li>📅 Seasonal & holiday-based features</li>
+  <li>📅 Seasonal patterns</li>
   <li>📊 Lag features & rolling demand statistics</li>
 </ul>
 
@@ -69,13 +92,6 @@ and cloud-native deployment.
   <li>🧪 Hyperparameter tuning using Optuna</li>
   <li>📉 Error-based optimization using MAPE</li>
 </ul>
-
-<h3>🔀 Final Demand Forecast</h3>
-<p>
-The final model predicts demand per region and time window, enabling
-<strong>better fleet allocation</strong>, <strong>reduced passenger wait time</strong>,
-and <strong>optimized surge pricing</strong>.
-</p>
 
 <hr/>
 
@@ -119,6 +135,7 @@ and <strong>optimized surge pricing</strong>.
 <ul>
   <li>Python, Pandas, NumPy</li>
   <li>Scikit-learn, Dask</li>
+  <li>MLflow</li>
   <li>Streamlit</li>
   <li>Docker & GitHub Actions</li>
   <li>AWS (EC2, ECR, IAM)</li>
@@ -168,8 +185,7 @@ and <strong>optimized surge pricing</strong>.
 <p>
 The model is evaluated using
 <strong>MAPE (Mean Absolute Percentage Error)</strong>,
-which measures prediction accuracy in percentage terms and
-is well-suited for demand forecasting problems.
+which is well-suited for demand forecasting problems.
 </p>
 
 <h3>📘 MAPE Formula</h3>
@@ -179,22 +195,13 @@ MAPE = (1 / n) × Σ | (Actual − Predicted) / Actual | × 100
 </pre>
 
 <h3>🧪 Validation Strategy</h3>
-
 <ul>
   <li>⏳ Time-based train–validation split</li>
   <li>🚫 Prevents future data leakage</li>
-  <li>📊 Evaluated across multiple temporal windows</li>
+  <li>📊 Evaluated across multiple time windows</li>
 </ul>
 
-<h3>📈 MLflow Experiment Tracking</h3>
-
-<ul>
-  <li>🔍 MAPE logged as the primary evaluation metric</li>
-  <li>📦 Parameters and artifacts tracked</li>
-  <li>🏆 Best model selected based on minimum MAPE</li>
-</ul>
-
-<h3>📊 Best Model Performance</h3>
+<h3>🏆 Best Model Performance</h3>
 
 <pre>
 Best MAPE : 7.93%
