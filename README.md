@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Docker-Containerized-blue?logo=docker">
   <img src="https://img.shields.io/badge/AWS-EC2%20%7C%20ECR-orange?logo=amazonaws">
   <img src="https://img.shields.io/badge/GitHub-Actions-black?logo=githubactions">
-  <img src="https://img.shields.io/badge/MLflow-Tracking-blue?logo=mlflow">
+  <img src="https://img.shields.io/badge/MLflow-Experiment%20Tracking-blue?logo=mlflow">
 </p>
 
 <p align="center">
@@ -64,10 +64,10 @@ and cloud-native deployment.
 
 <h3>📈 Supervised Machine Learning</h3>
 <ul>
-  <li>🌳 Tree-based regression models</li>
+  <li>🌳 Regression-based forecasting models</li>
   <li>⚖️ Feature scaling & encoding pipelines</li>
   <li>🧪 Hyperparameter tuning using Optuna</li>
-  <li>📉 Error-based optimization (RMSE, MAE)</li>
+  <li>📉 Error-based optimization using MAPE</li>
 </ul>
 
 <h3>🔀 Final Demand Forecast</h3>
@@ -128,7 +128,7 @@ and <strong>optimized surge pricing</strong>.
 
 <h2>🧹 Data Processing</h2>
 
-<pre>python src/data/make_dataset.py</pre>
+<pre>python src/data/data_ingestion.py</pre>
 
 <ul>
   <li>🧼 Removes duplicate & invalid records</li>
@@ -140,7 +140,8 @@ and <strong>optimized surge pricing</strong>.
 
 <h2>📍 Feature Engineering</h2>
 
-<pre>python src/features/build_features.py</pre>
+<pre>python src/features/extract_features.py</pre>
+<pre>python src/features/feature_processing.py</pre>
 
 <ul>
   <li>⏰ Temporal features (hour, weekday, weekend)</li>
@@ -152,13 +153,53 @@ and <strong>optimized surge pricing</strong>.
 
 <h2>🤖 Model Training</h2>
 
-<pre>python src/models/train_model.py</pre>
+<pre>python src/models/train.py</pre>
 
 <ul>
   <li>⚙️ Pipeline-based training</li>
-  <li>🧪 Hyperparameter optimization</li>
+  <li>🧪 Hyperparameter optimization using Optuna</li>
   <li>📈 MLflow experiment tracking</li>
 </ul>
+
+<hr/>
+
+<h2>📊 Model Evaluation</h2>
+
+<p>
+The model is evaluated using
+<strong>MAPE (Mean Absolute Percentage Error)</strong>,
+which measures prediction accuracy in percentage terms and
+is well-suited for demand forecasting problems.
+</p>
+
+<h3>📘 MAPE Formula</h3>
+
+<pre>
+MAPE = (1 / n) × Σ | (Actual − Predicted) / Actual | × 100
+</pre>
+
+<h3>🧪 Validation Strategy</h3>
+
+<ul>
+  <li>⏳ Time-based train–validation split</li>
+  <li>🚫 Prevents future data leakage</li>
+  <li>📊 Evaluated across multiple temporal windows</li>
+</ul>
+
+<h3>📈 MLflow Experiment Tracking</h3>
+
+<ul>
+  <li>🔍 MAPE logged as the primary evaluation metric</li>
+  <li>📦 Parameters and artifacts tracked</li>
+  <li>🏆 Best model selected based on minimum MAPE</li>
+</ul>
+
+<h3>📊 Best Model Performance</h3>
+
+<pre>
+Best MAPE : 7.93%
+Model     : Linear Regression
+</pre>
 
 <hr/>
 
@@ -179,73 +220,15 @@ docker build -t uber-demand-prediction .
 docker run -p 8000:8000 uber-demand-prediction
 </pre>
 
-<ul>
-  <li>Same container runs locally & on AWS</li>
-  <li>Ensures environment consistency</li>
-</ul>
-
 <hr/>
 
 <h2>🔄 CI/CD Pipeline</h2>
 
-<p>
-🚀 Fully automated CI/CD using <strong>GitHub Actions</strong> and <strong>AWS</strong>
-</p>
-
 <ul>
   <li>Triggered on every git push</li>
-  <li>Automated tests & model validation</li>
+  <li>Automated testing & model validation</li>
   <li>Docker image pushed to Amazon ECR</li>
   <li>Auto deployment to AWS EC2</li>
-</ul>
-
-<hr/>
-
-<h2>🧾 CI/CD Architecture</h2>
-
-<pre class="mermaid">
-flowchart LR
-    A[Developer Push] --> B[GitHub Repo]
-    B --> C[GitHub Actions]
-    C --> D[Tests & Build]
-    D --> E[Docker Image]
-    E --> F[AWS ECR]
-    F --> G[AWS EC2]
-    G --> H[Streamlit App Live]
-</pre>
-
-<hr/>
-
-<h2>☁️ AWS Services</h2>
-
-<table>
-<tr><th>Service</th><th>Purpose</th></tr>
-<tr><td>EC2</td><td>Streamlit hosting</td></tr>
-<tr><td>ECR</td><td>Docker image registry</td></tr>
-<tr><td>IAM</td><td>Secure access</td></tr>
-<tr><td>AWS CLI</td><td>Deployment automation</td></tr>
-</table>
-
-<hr/>
-
-<h2>🔐 Security Best Practices</h2>
-
-<ul>
-  <li>🔒 No hardcoded credentials</li>
-  <li>🛡️ IAM-based access control</li>
-  <li>🔑 GitHub Secrets</li>
-  <li>📦 Isolated Docker containers</li>
-</ul>
-
-<hr/>
-
-<h2>🌟 Key Highlights</h2>
-
-<ul>
-  <li>End-to-end demand forecasting system</li>
-  <li>Production-grade MLOps workflow</li>
-  <li>Cloud-deployed Streamlit dashboard</li>
-  <li>Automated CI/CD pipeline</li>
 </ul>
 
 <hr/>
@@ -264,6 +247,6 @@ flowchart LR
 <h2>⭐ Support & Feedback</h2>
 
 <p>
-🌟 If you enjoyed this project, give it a star!<br>
+🌟 If you enjoyed this project, give it a star!<br/>
 💡 Suggestions, feedback, or ideas are highly appreciated.
 </p>
