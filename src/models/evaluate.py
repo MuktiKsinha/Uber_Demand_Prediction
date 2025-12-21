@@ -120,7 +120,7 @@ if __name__ == "__main__":
     model_uri = logged_model.model_uri 
     logger.info("Mlflow logging complete")
 
-    # save the json file
+    # save the json filE
     json_file_save_path = root_path / "run_information.json"
     save_run_information(
         run_id=run_id,
