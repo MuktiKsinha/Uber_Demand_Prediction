@@ -93,12 +93,12 @@ jobs:
             docker pull ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY_URI }}:latest
 
             echo "Stopping old container (if exists)"
-            docker stop hybrid_resys || true
-            docker rm hybrid_resys || true
+            docker stop uber-demand-pred || true
+            docker rm uber-demand-pred || true
 
             echo "Running new container"
             docker run -d \
-              --name hybrid_resys \
+              --name uber-demand-pred \
               -p 8000:8000 \
               ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY_URI }}:latest
 
