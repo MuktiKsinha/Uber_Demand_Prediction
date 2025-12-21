@@ -20,10 +20,10 @@ mlflow.set_tracking_uri('https://dagshub.com/MuktiKsinha/Uber_Demand_Prediction.
 def load_model_information(file_path):
     with open(file_path) as f:
         run_info = json.load(f)
-
+        
     return run_info
 
-#set model name
+# set model name
 model_path = load_model_information("run_information.json")["model_uri"]
 
 # load the latest model from model registry
@@ -37,26 +37,21 @@ root_path = current_path.parent.parent
 train_data_path = root_path / "data/processed/train.csv"
 test_data_path = root_path / "data/processed/test.csv"
 
-# path for encoder
-encoder_path  = root_path/ "models/encoder.joblib"
-encoder = joblib.load(model_path)
+# path for the encoder
+encoder_path = root_path / "models/encoder.joblib"
+encoder = joblib.load(encoder_path)
 
 # build the model pipeline
-model_pipe = Pipeline([
+model_pipe = Pipeline(steps=[
     ("encoder",encoder),
-    ("regressor",model)]
-)
+    ("regressor",model)
+])
 
-
-#test function
-@pytest.mark.parametrize(
-    argnames="data_path,threshold",
+# test function
+@pytest.mark.parametrize(argnames="data_path,threshold",
                          argvalues=[(train_data_path,0.1),
                                     (test_data_path,0.1)])
-
-#test function
-
-def test_performance(data_path,threshold):
+def test_performance(data_path, threshold):
     # load the data from path
     data = pd.read_csv(data_path, parse_dates=["tpep_pickup_datetime"]).set_index("tpep_pickup_datetime")
     # make X and y
