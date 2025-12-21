@@ -3,7 +3,6 @@ import dagshub
 import json
 from mlflow import MlflowClient
 
-set_config(transform_output="pandas")
 
 dagshub.init(repo_name='Uber_Demand_Prediction',repo_owner='MuktiKsinha',mlflow = True)
 
